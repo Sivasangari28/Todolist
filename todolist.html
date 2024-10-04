@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+    <style>
+        body { 
+            background-color: bisque;
+            font-family: Arial, sans-serif; 
+            text-align: center;
+            max-width: 700px; 
+            margin: 0 auto; 
+            padding: 250px 20px; }
+        input, button { 
+            padding: 10px; font-size: 16px; }
+        ul { 
+            list-style: none; padding: 0; }
+        li {
+            background: plum; padding: 10px; margin-bottom: 5px; }
+        
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" id="new-task" placeholder="Add new task">
+    <button id="add-task">Add</button>
+    <ul id="task-list"></ul>
+
+    <script>
+        
+        document.getElementById('add-task').onclick = function() {
+            var taskInput = document.getElementById('new-task');
+            var task = taskInput.value;
+            if (task) {
+                var li = document.createElement('li');
+                li.innerHTML = task + ' <button onclick="deleteTask(this)">Delete</button> <button onclick="updateTask(this)">Update</button>';
+                document.getElementById('task-list').appendChild(li);
+                taskInput.value = '';
+            }
+        };
+
+        
+        function deleteTask(button) {
+            var li = button.parentNode;
+            li.parentNode.removeChild(li);
+        }
+
+        
+        function updateTask(button) {
+            var li = button.parentNode;
+            var task = prompt('Update task:', li.childNodes[0].nodeValue);
+            if (task) {
+                li.childNodes[0].nodeValue = task;
+            }
+        }
+    </script>
+</body>
+</html>
